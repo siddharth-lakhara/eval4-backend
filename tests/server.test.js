@@ -11,3 +11,5 @@ describe('Tests for basic server functionality', () => {
     });
   });
 });
+
+describe();
