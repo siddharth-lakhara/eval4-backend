@@ -140,7 +140,6 @@ describe('tests for path update db', () => {
     let rcvdJSON = '';
     http.get('http://localhost:8080/first', (response) => {
       response.setEncoding('utf8');
-      //   expect(response.statusCode).toBe(200);
       response.on('data', (data) => {
         rcvdJSON += data;
       });
