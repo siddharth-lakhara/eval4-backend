@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "eval4",
+    "password": "root",
+    "database": "eval4_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "eval4",
+    "password": "root",
+    "database": "eval4_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "eval4",
+    "password": "root",
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
