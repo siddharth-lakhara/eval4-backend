@@ -1,7 +1,7 @@
 const http = require('http');
 
 describe('Tests for basic server functionality', () => {
-  test('Server running', () => {
+  test('Server running', (done) => {
     http.get('http://localhost:8080/ping', (response) => {
       response.setEncoding('utf8');
       expect(response.statusCode).toBe(200);
@@ -12,20 +12,8 @@ describe('Tests for basic server functionality', () => {
   });
 });
 
-describe('tests for path update db', () => {
-  test('Gives 200 response', () => {
-    http.get('http://localhost:8080/updatedb', (response) => {
-      response.setEncoding('utf8');
-      expect(response.statusCode).toBe(200);
-      response.on('data', () => {
-        done();
-      });
-    });
-  });
-});
-
-describe('tests for path update db', () => {
-  test('Gives 200 response', () => {
+describe('tests for first API', () => {
+  test('Gives 200 response', (done) => {
     http.get('http://localhost:8080/first', (response) => {
       response.setEncoding('utf8');
       expect(response.statusCode).toBe(200);
@@ -136,7 +124,7 @@ describe('tests for path update db', () => {
     ],
   };
 
-  test('Gives desired output', () => {
+  test('Gives desired output', (done) => {
     let rcvdJSON = '';
     http.get('http://localhost:8080/first', (response) => {
       response.setEncoding('utf8');
@@ -144,6 +132,51 @@ describe('tests for path update db', () => {
         rcvdJSON += data;
       });
       response.on('end', () => {
+        rcvdJSON = JSON.parse(rcvdJSON);
+        expect(rcvdJSON).toEqual(verifyJSON);
+        done();
+      });
+    });
+  });
+});
+
+
+describe('tests for path update db', () => {
+  test('Gives 200 response', (done) => {
+    http.get('http://localhost:8080/updatedb', (response) => {
+      response.setEncoding('utf8');
+      expect(response.statusCode).toBe(200);
+      response.on('data', () => {
+        done();
+      });
+    });
+  });
+});
+
+describe('tests for second API', () => {
+  test('Gives 200 response', (done) => {
+    http.get('http://localhost:8080/second/23', (response) => {
+      response.setEncoding('utf8');
+      expect(response.statusCode).toBe(200);
+      response.on('data', () => {
+        done();
+      });
+    });
+  });
+
+  const verifyJSON = {
+    answer: 'Kabul',
+  };
+
+  test('Gives desired output', (done) => {
+    let rcvdJSON = '';
+    http.get('http://localhost:8080/second/23', (response) => {
+      response.setEncoding('utf8');
+      response.on('data', (data) => {
+        rcvdJSON += data;
+      });
+      response.on('end', () => {
+        rcvdJSON = JSON.parse(rcvdJSON);
         expect(rcvdJSON).toEqual(verifyJSON);
         done();
       });
