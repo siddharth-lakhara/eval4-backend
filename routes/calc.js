@@ -25,7 +25,7 @@ module.exports = [{
             { score },
             { where: { username } },
           ).then(() => {
-            reply(score);
+            reply({ score });
           });
         });
       });
