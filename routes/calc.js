@@ -4,7 +4,7 @@ module.exports = [{
   method: 'POST',
   path: '/calc',
   handler: (req, reply) => {
-    const { username } = req.payload;
+    const { username } = JSON.parse(req.payload);
     Models.responses.findOne({ where: { username } })
       .then((row) => {
         const response = JSON.parse(row.response);

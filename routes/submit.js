@@ -4,7 +4,7 @@ module.exports = [{
   method: 'POST',
   path: '/submit',
   handler: (req, reply) => {
-    const { username, questnid, answer } = req.payload;
+    const { username, questnid, answer } = JSON.parse(req.payload);
     Models.responses.findOne({ where: { username } })
       .then((oldResponse) => {
         console.log(oldResponse);
