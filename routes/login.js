@@ -4,7 +4,7 @@ module.exports = [{
   method: 'POST',
   path: '/login',
   handler: (req, reply) => {
-    const { userName } = req.payload;
+    const userName = req.payload;
     Models.users.findOrCreate({ where: { username: userName } })
       .spread((row, bool) => {
         if (bool) { // new user is created
