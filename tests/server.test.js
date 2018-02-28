@@ -420,3 +420,27 @@ describe('tests for path update db', () => {
     });
   });
 });
+
+describe('test for fetch', () => {
+  test('Gives 200 response', (done) => {
+    http.get('http://localhost:8080/fetch/siddharth', (response) => {
+      response.setEncoding('utf8');
+      expect(response.statusCode).toBe(200);
+      response.on('data', () => {
+        done();
+      });
+    });
+  });
+});
+
+describe('test for leaders', () => {
+  test('Gives 200 response', (done) => {
+    http.get('http://localhost:8080/leaders', (response) => {
+      response.setEncoding('utf8');
+      expect(response.statusCode).toBe(200);
+      response.on('data', () => {
+        done();
+      });
+    });
+  });
+});

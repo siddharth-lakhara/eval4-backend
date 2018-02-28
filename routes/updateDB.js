@@ -19,21 +19,21 @@ module.exports = [{
 
     firstAPIHandler(url1).then((allQuestions) => { // get all questions from api1
       const returnQuestionObject = allQuestions.allQuestions;
-      (allQuestions.allQuestions).map((question) => {
+      (allQuestions.allQuestions).map((questionArray) => {
+        const { question, questionId, ...options } = questionArray;
+        console.log(options);
+        const optionArray = Object.keys(options).map(elem => options[elem]);
+        console.log(optionArray);
         const questionObject = {
-          questn: question.question,
-          questnid: question.questionId,
-          options: // this can be modified to have N number of options
-            `${question.option1},${
-              question.option2},${
-              question.option3},${
-              question.option4}`,
+          questn: question,
+          questnid: questionId,
+          options: JSON.stringify(optionArray),
         };
 
         Models.questions.create(questionObject);
 
         // type coersion will handle the concatenation
-        PromiseArray.push(secondAPIHandler(url2 + question.questionId));
+        PromiseArray.push(secondAPIHandler(url2 + questionId));
       });
       Promise.all(PromiseArray).then((PromiseElement) => {
         PromiseElement.map((answer, index) => {
